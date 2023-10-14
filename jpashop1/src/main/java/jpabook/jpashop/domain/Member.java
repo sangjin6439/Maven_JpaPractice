@@ -1,6 +1,8 @@
 package jpabook.jpashop.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -12,6 +14,9 @@ public class Member {
     private String city;
     private String street;
     private String zipcode;
+
+    @OneToMany(mappedBy = "member") //mappedBy는 연관관계의 주인을 나타낸다.
+    private List<Order> orders = new ArrayList<>(); //관례로 리스트는 초기화 해주는 거임. 양방향 연관관계임 -> 잘못된 코드라고 생각함 맴버를 보고 맴버의 orders를 꺼내는게 아니라 중간에 끊어주는게 설계가 깔끔
 
     public Long getId() {
         return id;
