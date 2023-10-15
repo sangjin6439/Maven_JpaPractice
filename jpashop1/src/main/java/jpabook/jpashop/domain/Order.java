@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.FetchType.LAZY;
+
 @Entity
 @Table(name ="ORDERS") //이름을 order로 했을때 오류가 날수도 있다.
 public class Order {
@@ -13,14 +15,14 @@ public class Order {
     @Column(name = "ORDER_ID")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name ="MEMBER_ID")
     private Member member;
 
-    @OneToMany(mappedBy ="order")
+    @OneToMany(mappedBy ="order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name ="DELIVERY_ID")
     private Delivery delivery;
 
