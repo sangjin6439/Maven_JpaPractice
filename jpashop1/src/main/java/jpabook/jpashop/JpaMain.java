@@ -1,5 +1,7 @@
 package jpabook.jpashop;
 
+import jpabook.jpashop.domain.Book;
+import jpabook.jpashop.domain.Item;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
 
@@ -19,15 +21,11 @@ public class JpaMain {
         tx.begin();
 
         try {
+            Book book = new Book();
+            book.setName("JPA");
+            book.setAuthor("김영한");
 
-            Order order = new Order();
-            em.persist(order);
-//          order.addOrderItem(new OrderItem()); 양방향으로 조회할 때
-
-            OrderItem orderItem =new OrderItem();
-            orderItem.setOrder(order);
-
-            em.persist(orderItem);
+            em.persist(book);
 
             tx.commit();
         }catch (Exception e){
